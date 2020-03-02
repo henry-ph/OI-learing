@@ -1,0 +1,36 @@
+int prim()  
+{  
+    int res=0;  
+  
+    vis[1]=1;  
+    low[1]=0;  
+  
+    for(int i = 2 ; i <= M ; i++)  
+        low[i] = G[1][i];  
+  
+    for(int i = 2 ; i <= M ; i++)  
+    {  
+        int minc = inf;  
+        int pos=0;  
+  
+        for(int i = 1 ; i <= M ; i++)  
+            if(!vis[i] && low[i] < minc )  
+            {  
+                minc = low[i];  
+                pos = i;  
+            }  
+  
+        if(minc == inf)  
+            return -1;  
+  
+        vis[pos]=1;  
+        res += minc;  
+  
+        for(int i = 1 ; i <= M ; i++)  
+            if(!vis[i] && low[i] > G[pos][i])  
+                low[i] = G[pos][i];  
+    }  
+  
+    return res;  
+  
+}  
